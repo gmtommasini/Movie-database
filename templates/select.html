@@ -1,0 +1,43 @@
+{% extends 'bootstrap/base.html' %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block styles %}
+  {{ super() }}
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,700">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,700">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+{% endblock %}
+
+{% block title %}Select Movie{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="heading">Select Movie</h1>
+    <form method="POST" action="{{ url_for('views.add') }}">
+      <div class="cards-container">
+      {% for movie in movies %}
+        <div class="card" style="width: 18rem;">
+          <div class="card-body">
+            <h5 class="card-title">{{ movie.original_title }}</h5>
+            <img 
+                class="poster_select" 
+                width="200"
+                src="{{ img_base_url }}{{ movie.poster_path }}" 
+                alt="{{ movie.original_title }}"
+                style="height: 300px;"
+            >
+            <p class="card-text">{{ movie.release_date.split("-")[0] }}</p>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="movieCheckbox_{{ movie.id }}" name="movie_id" value="{{ movie.id }}">
+              <label class="form-check-label" for="movieCheckbox_{{ movie.id }}">
+                Select 
+              </label>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+      <button type="submit" class="btn btn-primary">Add</button>
+    </form>
+</div>
+{% endblock %}

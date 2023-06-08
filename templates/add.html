@@ -1,0 +1,23 @@
+{% extends 'bootstrap/base.html' %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block styles %}
+  {{ super() }}
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,700">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,700">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+{% endblock %}
+
+{% block title %}Add Movie{% endblock %}
+
+{% block content %}
+<div class="content">
+    <h1 class="heading">Add a Movie</h1>
+  </div>
+  <div class="form-content">
+    {{ wtf.quick_form(form) }}
+    <!-- <a href="{{ url_for('views.home') }}" class="btn btn-secondary">Home</a> -->
+    <br>
+    <a href="{{ url_for('views.home') }}" class="button">Home</a>
+  </div>
+{% endblock %}
